@@ -1,9 +1,8 @@
-const mapnik = require('mapnik')
+const geojsonVT = require('geojson-vt')
+const vtpbf = require('vt-pbf')
 const Logger = require('koop-logger')
 const Winnow = require('winnow')
 const log = new Logger()
-
-mapnik.register_default_input_plugins()
 
 function VectorTiles () {}
 VectorTiles.version = require('./package.json').version
@@ -29,19 +28,13 @@ VectorTiles.prototype.serve = function (req, res) {
       return keys
     }, {})
 
-    const tile = new mapnik.VectorTile(z, x, y)
-    const metadata = data.metadata || {}
-
     const start = Date.now()
-    console.log(data.features[0].geometry)
-    tile.addGeoJSON(JSON.stringify(data), 'layer')
-    tile.getData((e, tileData) => {
-      const duration = (Date.now() - start) / 1000
-      log.debug(`output=vector-tiles tile=${z},${x},${y} features=${data.features.length} duration=${duration}`)
-      if (e) return res.status(500).json({error: e.message})
-      res.set({'Content-Type': 'application/x-protobuf'})
-      res.send(tileData)
-    })
+    const tile = geojsonVT(data).getTile(z, x, y)
+    const pbf = vtpbf.fromGeojsonVt({layer: tile})
+    const duration = (Date.now() - start) / 1000
+    log.debug(`output=vector-tiles tile=${z},${x},${y} features=${data.features.length} duration=${duration}`)
+    res.set({'Content-Type': 'application/x-protobuf'})
+    res.send(pbf)
   })
 }
 
@@ -62,7 +55,7 @@ VectorTiles.prototype.metadata = function (req, res) {
       private: false,
       scheme: 'zxy',
       tilejson: '2.2.0',
-      tiles: ['http://localhost:8085/craigslist/washingtondc/apartments/VectorTiles/{z}/{x}/{y}.pbf' ],
+      tiles: [ 'http://localhost:8085/craigslist/washingtondc/apartments/VectorTiles/{z}/{x}/{y}.pbf' ],
       vector_layers: [
         {
           description: metadata.descriptions,
