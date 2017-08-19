@@ -33,7 +33,7 @@ VectorTiles.prototype.serve = function (req, res) {
     const pbf = vtpbf.fromGeojsonVt({layer: tile})
     const duration = (Date.now() - start) / 1000
     log.debug(`output=vector-tiles tile=${z},${x},${y} features=${data.features.length} duration=${duration}`)
-    res.set({'Content-Type': 'application/x-protobuf'})
+    res.set({'Content-Type': 'application/octet-stream'})
     res.send(pbf)
   })
 }
