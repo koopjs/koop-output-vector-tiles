@@ -1,0 +1,4 @@
+#!/bin/bash
+BASE_DIR=$(pwd)
+docker build -t build-tippecanoe ./
+docker run -v "$BASE_DIR/bin":/output build-tippecanoe
