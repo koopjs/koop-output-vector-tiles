@@ -2,7 +2,11 @@ const geojsonVT = require('geojson-vt')
 const vtpbf = require('vt-pbf')
 const Logger = require('koop-logger')
 const Winnow = require('winnow')
+const zlib = require('zlib')
+
 const log = new Logger()
+
+const tiles = new Array();
 
 function VectorTiles () {}
 VectorTiles.version = require('./package.json').version
@@ -20,24 +24,53 @@ VectorTiles.routes = [
   }
 ]
 
+// TODO add sample map with sample data - points, lines and polygons
 VectorTiles.prototype.serve = function (req, res) {
   this.model.pull(req, (e, data) => {
     if (e) return res.status(e.code || 500).json({ error: e.message })
     const {z, y, x} = Object.keys(req.params).reduce((keys, key) => {
       keys[key] = parseInt(req.params[key])
       return keys
-    }, {})
-
+    }, {});
+    log.debug('request received')
+    // id for the tile layer, assumes the id is already sanitzed no spaces etc
+    const id = req.params.id;
     const start = Date.now()
-    const tile = geojsonVT(data).getTile(z, x, y)
-    const pbf = vtpbf.fromGeojsonVt({layer: tile})
+    if (!tiles[id]) {
+      const indexStart = Date.now();
+      log.debug(`${id} waiting for geojsonvt to index tiles`)
+      tiles[id] = geojsonVT(data, {
+        maxZoom: 17,
+        indexMaxZoom: 5,
+        buffer: 2048,
+        tolerance: 2
+      })
+      const indexEnd = (Date.now() - indexStart) / 1000;
+      log.debug(`${id} tile indexing complete in ${indexEnd} milliseconds`)
+    }
+    const tile = tiles[id].getTile(z,x,y)
+    if (!tile) {
+      res.set(204)
+      return res.send()
+    }
+    const pbf = Buffer.from(vtpbf.fromGeojsonVt({
+        [id]: tile
+      })
+    )
     const duration = (Date.now() - start) / 1000
-    log.debug(`output=vector-tiles tile=${z},${x},${y} features=${data.features.length} duration=${duration}`)
-    res.set({'Content-Type': 'application/x-protobuf'})
-    res.send(pbf)
+    log.debug(`${id},output=vector-tiles tile=${z},${x},${y} features=${data.features.length} duration=${duration}`)
+    res.set({
+      'Cache-Control': 'public, max-age:3600',
+      'Content-Encoding': 'gzip'
+    })
+
+    //zlib.gzip enables a 4x decrease in data size sent with no noticeable performance decrease
+    zlib.gzip(pbf, function(_, result) {
+      res.send(result);
+    })
   })
 }
-
+// TODO change the "tiles" to reflect the id above and optional query parameters
 VectorTiles.prototype.metadata = function (req, res) {
   this.model.pull(req, (e, data) => {
     const metadata = Winnow.query(data).metadata
