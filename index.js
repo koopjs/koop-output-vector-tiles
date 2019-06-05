@@ -6,7 +6,7 @@ const config = require('config')
 const maxAge = config.vectorTiles.maxAge || 3600
 const log = new Logger()
 
-const tilesSetCache = [];
+const tilesSetCache = {};
 
 function VectorTiles () {}
 VectorTiles.version = require('./package.json').version
