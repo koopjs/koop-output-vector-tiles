@@ -1,16 +1,28 @@
 {
   "name": "@koopjs/output-vector-tiles",
   "version": "0.0.3",
-  "description": "",
-  "main": "index.js",
+  "description": "Koop output-plugin for generating Vector-tiles from GeoJSON",
+  "main": "dist/index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf dist",
+    "compile": "buble -i src -o dist",
+    "package": "npm run clean && npm run compile",
+    "start": "node server.js",
+    "test": "standard && tape test/*.js | tap-spec"
   },
   "author": "Daniel Fenton <dfenton@esri.com>",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koopjs/koop-output-vector-tiles.git"
+  },
+  "bugs": {
+    "url": "https://github.com/koopjs/koop-output-vector-tiles/issues"
+  },
+  "homepage": "https://github.com/koopjs/koop-output-vector-tiles#readme",
   "dependencies": {
     "geojson-vt": "^3.2.1",
     "koop-logger": "^1.2.0",
@@ -18,6 +30,9 @@
     "winnow": "^1.12.0"
   },
   "devDependencies": {
-    "standard": "^10.0.3"
+    "buble": "^0.19.7",
+    "standard": "^10.0.3",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.10.2"
   }
 }
