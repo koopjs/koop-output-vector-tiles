@@ -1,6 +1,5 @@
 const Utils = {}
 
-
 Utils.getTileSetKey = function getTileSetKey (host, id) {
   const fragments = []
   if (host) fragments.push(host)

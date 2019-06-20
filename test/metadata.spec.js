@@ -75,11 +75,10 @@ test('metadata', t => {
           source_name: 'Source from metadata'
         }],
         webpage: 'Webpage from metadata'
-    }, 'data is sent')
+      }, 'data is sent')
       return res
     }
   }
   testModel.metadata(req, res)
   t.end()
 })
-
