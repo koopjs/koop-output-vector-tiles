@@ -17,3 +17,14 @@ After startup, Koop will include `VectorTiles` routes for each registered provid
 
 `/github/:id/VectorTiles/:z/:x/:y.pbf`
 `/github/:id/VectorTiles/tiles.json`
+
+## Demo
+This repo ships with a demo application.  To try it out:
+
+```
+cd demo
+npm install
+npm start
+```
+
+Then open `demo/index.html` in the browser of your choice.  You should see vector tile rendered points around the city of Pasadena, CA.
