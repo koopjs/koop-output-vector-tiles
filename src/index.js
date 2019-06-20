@@ -19,7 +19,6 @@ VectorTiles.routes = [
 
 VectorTiles.prototype.serve = serve
 
-// TODO change the "tiles" to reflect the id above and optional query parameters
 VectorTiles.prototype.metadata = metadata
 
 module.exports = VectorTiles

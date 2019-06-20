@@ -1,7 +1,7 @@
 const _ = require('lodash')
 const geojsonVT = require('geojson-vt')
 const vtpbf = require('vt-pbf')
-const Logger = require('koop-logger')
+const Logger = require('@koopjs/logger')
 const config = require('config')
 const tileSetConfig = require('./tile-set-config')
 const log = new Logger()

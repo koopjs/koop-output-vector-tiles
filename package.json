@@ -24,8 +24,10 @@
   },
   "homepage": "https://github.com/koopjs/koop-output-vector-tiles#readme",
   "dependencies": {
+    "@koopjs/logger": "^2.0.4",
+    "config": "^3.1.0",
     "geojson-vt": "^3.2.1",
-    "koop-logger": "^1.2.0",
+    "lodash": "^4.17.11",
     "vt-pbf": "^3.1.1",
     "winnow": "^1.12.0"
   },
