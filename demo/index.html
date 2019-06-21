@@ -4,8 +4,8 @@
     <meta charset='utf-8' />
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.0.0/mapbox-gl.js'></script>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.0.0/mapbox-gl.js' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -19,25 +19,28 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZG1mZW50b24xIiwiYSI6IkVXbXR1RzQifQ.XRUIHgHV8I
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/light-v9',
-    zoom: 13,
-    center: [-77.0369, 38.9072]
+    zoom: 12,
+    center: [-118.1445, 34.1478]
 });
 
 map.on('load', function () {
   map.addLayer({
-      "id": "dc",
+      "id": "trees",
       "source": {
           type: 'vector',
-          tiles: ['http://localhost:8085/googlesheets/1Q6wN6qnvTaL7ZfJtSH0W6E23wtVfgXKemsGRE8bfHBc/houses!A1:AA/VectorTiles/{z}/{x}/{y}.pbf']
+          tiles: ['http://localhost:8085/file-geojson/trees/VectorTiles/{z}/{x}/{y}.pbf']
       },
-      "source-layer": "layer",
+      "source-layer": "trees",
       "type": "circle",
       "paint": {
-        "circle-radius": 10,
-        "circle-color": "#007cbf"
+        "circle-radius": 5,
+        "circle-color": "#007cbf",
+        "circle-stroke-width": 0.5
       }
   });
 });
+
+
 </script>
 
 </body>
