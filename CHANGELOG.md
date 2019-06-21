@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+### Fixed
+* strip undefined properties from tile-config object
+
 ## [1.0.0] - 2019-06-21
 ### Changed
 * path to package.json

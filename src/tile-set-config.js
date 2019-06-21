@@ -1,7 +1,7 @@
 const _ = require('lodash')
 const config = require('config')
 // geojson-vt options; anything undefined will use geojsonVT defaults
-module.exports = {
+const settings = {
   maxZoom: _.get(config, 'koopOutputVectorTiles.geojsonVT.maxZoom'), // max zoom to preserve detail on; can't be higher than 24
   tolerance: _.get(config, 'koopOutputVectorTiles.geojsonVT.tolerance'), // simplification tolerance (higher means simpler)
   extent: _.get(config, 'koopOutputVectorTiles.geojsonVT.extent'), // tile extent (both width and height)
@@ -13,3 +13,5 @@ module.exports = {
   indexMaxZoom: _.get(config, 'koopOutputVectorTiles.geojsonVT.indexMaxZoom'), // max zoom in the initial tile index
   indexMaxPoints: _.get(config, 'koopOutputVectorTiles.geojsonVT.indexMaxPoints') // max number of points per tile in the index
 }
+
+module.exports = _.omitBy(settings, _.isUndefined)
