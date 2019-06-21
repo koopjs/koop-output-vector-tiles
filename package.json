@@ -1,6 +1,6 @@
 {
   "name": "@koopjs/output-vector-tiles",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Koop output-plugin for generating Vector-tiles from GeoJSON",
   "main": "dist/index.js",
   "directories": {
