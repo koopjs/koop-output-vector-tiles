@@ -19,7 +19,7 @@ koop.register(tiles)
 // Register providers
 ```
 
-After startup, Koop will include `VectorTiles` routes for each registered provider.  For example, if you had registered the Github provider, the following routes would be available:
+After startup, Koop will include `VectorTileServer` routes for each registered provider.  For example, if you had registered the Github provider, the following routes would be available:
 
 ```bash
 /github/:id/VectorTileServer/:z([0-9]+)/:x([0-9]+)/:y([0-9]+).pbf  GET
@@ -42,7 +42,7 @@ After startup, Koop will include `VectorTiles` routes for each registered provid
 ### Using a tile set cache
 This output plugin has a built-in in-memory cache for storing generated tile sets for a set period of time.  This may improve performance.  It is disabled by default. You can use it by setting your Koop config like:
 
-```json
+```js
 {
   "koopOutputVectorTiles": {
     "cache": true,
@@ -54,7 +54,7 @@ This output plugin has a built-in in-memory cache for storing generated tile set
 ### Tile generation settings
 This plugin leverages [geojsonvt]() to create tiles from GeoJSON.  If you want to adjust any of the geojsonvt settings, you can do so in the Config: 
 
-```json
+```js
 {
   "koopOutputVectorTiles": {
     "maxZoom": , // max zoom to preserve detail on; can't be higher than 24

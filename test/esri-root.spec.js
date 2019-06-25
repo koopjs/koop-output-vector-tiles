@@ -32,7 +32,7 @@ test('esriRoot', t => {
   const req = {
     params: { id: 'test', z: 0, x: 0, y: 0 },
     headers: {},
-    path: '/test/VectorTiles/resources/styles/root.json',
+    path: '/test/VectorTileServer/resources/styles/root.json',
     protocol: 'http',
     host: 'example.com'
   }
@@ -47,7 +47,7 @@ test('esriRoot', t => {
         sources: {
           esri: {
             type: 'vector',
-            url: 'http://example.com/test/VectorTiles/'
+            url: 'http://example.com/test/VectorTileServer/'
           }
         },
         layers: [{

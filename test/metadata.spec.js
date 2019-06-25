@@ -29,7 +29,7 @@ test('metadata', t => {
   const req = {
     params: { z: 0, x: 0, y: 0 },
     headers: {},
-    path: '/test/VectorTiles/tiles.json',
+    path: '/test/VectorTileServer/tiles.json',
     protocol: 'http',
     host: 'example.com'
   }
@@ -53,7 +53,7 @@ test('metadata', t => {
         private: false,
         scheme: 'zxy',
         tilejson: '2.2.0',
-        tiles: ['http://example.com/test/VectorTiles/{z}/{x}/{y}.pbf'],
+        tiles: ['http://example.com/test/VectorTileServer/{z}/{x}/{y}.pbf'],
         vector_layers: [{
           description: undefined,
           fields: {

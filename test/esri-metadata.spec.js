@@ -35,7 +35,7 @@ test('esriMetadata', t => {
   const req = {
     params: { z: 0, x: 0, y: 0 },
     headers: {},
-    path: '/test/VectorTiles',
+    path: '/test/VectorTileServer',
     protocol: 'http',
     host: 'example.com'
   }
