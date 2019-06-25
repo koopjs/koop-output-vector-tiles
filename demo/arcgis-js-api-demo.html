@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+  <title>VectorTileLayer sample</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/3.28/esri/css/esri.css">
+  <style>
+    html, 
+    body, 
+    #map {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <script src="https://js.arcgis.com/3.28/"></script>
+  <script>
+    require([
+      "esri/map",
+      "esri/layers/VectorTileLayer",
+      "dojo/domReady!"
+    ], function(Map, VectorTileLayer) {
+
+      var map = new Map("map", {
+        basemap: "topo",
+        zoom: 13,
+        center: [-118.1445, 34.1478]
+      });
+
+      var polylayer = new VectorTileLayer("http://localhost:8085/file-geojson/pasadena-parks/VectorTileServer/");
+      map.addLayer(polylayer);
+      var linelayer = new VectorTileLayer("http://localhost:8085/file-geojson/pasadena-bus/VectorTileServer/");
+      map.addLayer(linelayer);
+      var pointlayer = new VectorTileLayer("http://localhost:8085/file-geojson/trees/VectorTileServer/");
+      map.addLayer(pointlayer);
+    });
+  </script>
+</head>
+<body>
+  <div id="map"></div>
+</body>
+</html>

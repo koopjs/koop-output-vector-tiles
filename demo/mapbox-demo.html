@@ -5,7 +5,7 @@
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.0.0/mapbox-gl.js'></script>
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.0.0/mapbox-gl.js' rel='stylesheet' />
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.0.0/mapbox-gl.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -25,23 +25,48 @@ var map = new mapboxgl.Map({
 
 map.on('load', function () {
   map.addLayer({
+      id: "pasadena-parks",
+      source: {
+          type: 'vector',
+          tiles: ['http://localhost:8085/file-geojson/pasadena-parks/VectorTileServer/{z}/{x}/{y}.pbf']
+      },
+      "source-layer": "pasadena-parks",
+      type: "fill",
+      paint: {
+          'fill-opacity': 0.5,
+          'fill-color': '#008000'
+        }
+  });
+
+  map.addLayer({
+      "id": "pasadena-bus",
+      "source": {
+          type: 'vector',
+          tiles: ['http://localhost:8085/file-geojson/pasadena-bus/VectorTileServer/{z}/{x}/{y}.pbf']
+      },
+      "source-layer": "pasadena-bus",
+      "type": "line",
+      paint: {
+        'line-width': 2,
+        'line-color': '#FF0000'
+        }
+  });
+
+  map.addLayer({
       "id": "trees",
       "source": {
           type: 'vector',
-          tiles: ['http://localhost:8085/file-geojson/trees/VectorTiles/{z}/{x}/{y}.pbf']
+          tiles: ['http://localhost:8085/file-geojson/trees/VectorTileServer/{z}/{x}/{y}.pbf']
       },
       "source-layer": "trees",
       "type": "circle",
       "paint": {
-        "circle-radius": 5,
+        "circle-radius": 3,
         "circle-color": "#007cbf",
         "circle-stroke-width": 0.5
       }
   });
 });
-
-
 </script>
-
 </body>
 </html>

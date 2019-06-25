@@ -75,7 +75,7 @@ test('metadata', t => {
           source_name: 'Source from metadata'
         }],
         webpage: 'Webpage from metadata'
-      }, 'data is sent')
+      }, 'metaddata is sent')
       return res
     }
   }
