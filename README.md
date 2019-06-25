@@ -103,7 +103,7 @@ Add `paint` configuration for each `circle`, `line`,and `fill` types:
 See the [Mapbox style specification](https://docs.mapbox.com/mapbox-gl-js/style-spec/) for additional properties that can be set in `paint`.
 
 #### ArcGIS style via your provider:
-You can modify the GeoJSON metadata of your provider to handle styling"
+You can modify the GeoJSON metadata of your provider to handle styling:
 
 ```javascript
 // inside your getData function
