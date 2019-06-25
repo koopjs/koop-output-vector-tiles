@@ -13,7 +13,7 @@ fixtureGeojson.metadata = {
       'circle-radius': 8
     }
   }
-  
+
 }
 
 function TestModel () {
