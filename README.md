@@ -42,7 +42,7 @@ After startup, Koop will include `VectorTileServer` routes for each registered p
 ### Using a tile set cache
 This output plugin has a built-in in-memory cache for storing generated tile sets for a set period of time.  This may improve performance.  It is disabled by default. You can use it by setting your Koop config like:
 
-```js
+```javascript
 {
   "koopOutputVectorTiles": {
     "cache": true,
@@ -54,7 +54,7 @@ This output plugin has a built-in in-memory cache for storing generated tile set
 ### Tile generation settings
 This plugin leverages [geojsonvt]() to create tiles from GeoJSON.  If you want to adjust any of the geojsonvt settings, you can do so in the Config: 
 
-```js
+```javascript
 {
   "koopOutputVectorTiles": {
     "maxZoom": , // max zoom to preserve detail on; can't be higher than 24
@@ -78,7 +78,7 @@ ArcGIS applications make style requests to the vector tile server at `/VectorTil
 
 Add `paint` configuration for each `circle`, `line`,and `fill` types:
 
-```json
+```javascript
 {
   "koopOutputVectorTiles": {
     "circle": {
