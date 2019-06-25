@@ -113,7 +113,7 @@ geojson.metadata.vt = {}
 geojson.metadata.vt = {
   type: 'circle',
   paint: {
-    'circle-radius: 4
+    'circle-radius': 4
   }
 }
 
