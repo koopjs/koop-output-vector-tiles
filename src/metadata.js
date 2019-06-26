@@ -1,5 +1,5 @@
 const esriExtent = require('esri-extent')
-const Winnow = require('Winnow')
+const Winnow = require('winnow')
 const { getTileSetKey } = require('./utils')
 
 /**
