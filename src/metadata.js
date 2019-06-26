@@ -1,15 +1,29 @@
+const esriExtent = require('esri-extent')
 const Winnow = require('winnow')
-const Utils = require('./utils')
+const { getTileSetKey } = require('./utils')
+
+/**
+ * Create "center" value for metadata
+ * @param {object} extent
+ */
+function center (extent) {
+  const x = (extent.xmax - extent.xmin) / 2
+  const y = (extent.ymax - extent.ymin) / 2
+  return `${x},${y},10` // @TODO - calculate best zoom level for this extent
+}
 
 module.exports = function (req, res) {
-  const tileSetKey = Utils.getTileSetKey(req.params.host, req.params.id)
-  this.model.pull(req, (e, data) => {
-    if (!data) return res.status(404).send()
-    const metadata = Winnow.query(data).metadata
+  const tileSetKey = getTileSetKey(req.params.host, req.params.id)
+  this.model.pull(req, (e, geojson) => {
+    if (e) return res.status(500).json(e)
+    if (!geojson) return res.status(404).send()
+    const metadata = Winnow.query(geojson).metadata
+    const extent = esriExtent(geojson)
+
     const json = {
       attribution: metadata.attribution,
-      bounds: metadata.extent,
-      center: metadata.center,
+      bounds: `${extent.xmin},${extent.ymin},${extent.xmax},${extent.ymax}`,
+      center: center(extent),
       created: metadata.created,
       description: metadata.description,
       filesize: 0,

@@ -19,15 +19,30 @@ koop.register(tiles)
 // Register providers
 ```
 
-After startup, Koop will include `VectorTiles` routes for each registered provider.  For example, if you had registered the Github provider, the following routes would be available:
+After startup, Koop will include `VectorTileServer` routes for each registered provider.  For example, if you had registered the Github provider, the following routes would be available:
 
-`/github/:id/VectorTiles/:z/:x/:y.pbf`
-`/github/:id/VectorTiles/tiles.json`
+```bash
+/github/:id/VectorTileServer/:z([0-9]+)/:x([0-9]+)/:y([0-9]+).pbf  GET
+/github/:id/VectorTileServer/tiles.json                            GET
+/github/:id/VectorTileServer                                       GET
+/github/:id/VectorTileServer/resources/styles/root.json            GET
+```
+
+## Routes
+| Route | Method | Description |
+| --- | --- | --- |
+|`/VectorTileServer/:z([0-9]+)/:x([0-9]+)/:y([0-9]+).pbf`| GET | Get a specific tile. |
+|`/VectorTileServer/tiles.json`| GET | Standard vector tile metadata. |
+|`/VectorTileServer`| GET | ArcGIS vector tile metadata. |
+|`/VectorTileServer/resources/styles/root.json`| GET | ArcGIDS vector tile styling info. |
+
+
+## Options and configuration
 
 ### Using a tile set cache
 This output plugin has a built-in in-memory cache for storing generated tile sets for a set period of time.  This may improve performance.  It is disabled by default. You can use it by setting your Koop config like:
 
-```json
+```javascript
 {
   "koopOutputVectorTiles": {
     "cache": true,
@@ -36,10 +51,10 @@ This output plugin has a built-in in-memory cache for storing generated tile set
 }
 ```
 
-### Other settings
+### Tile generation settings
 This plugin leverages [geojsonvt]() to create tiles from GeoJSON.  If you want to adjust any of the geojsonvt settings, you can do so in the Config: 
 
-```json
+```javascript
 {
   "koopOutputVectorTiles": {
     "maxZoom": , // max zoom to preserve detail on; can't be higher than 24
@@ -56,8 +71,56 @@ This plugin leverages [geojsonvt]() to create tiles from GeoJSON.  If you want t
 }
 ```
 
-## Demo
-This repo ships with a demo application.  To try it out:
+### ArcGIS tile styling
+ArcGIS applications make style requests to the vector tile server at `/VectorTileServer/resources/styles/root.json`. You can control the style served by this endpoint by either (1) setting default values in your config file, or (2) adding styling info to the GeoJSON metadata in your provider.
+
+#### ArcGIS style via config
+
+Add `paint` configuration for each `circle`, `line`,and `fill` types:
+
+```javascript
+{
+  "koopOutputVectorTiles": {
+    "circle": {
+      "paint": {
+        "circle-radius": 3
+      }
+    },
+    "line": {
+      "paint": {
+        "line-width": 7
+      }
+    },
+    "fill": {
+      "paint": {
+        "fill-opacity": 0.25
+      }
+    }
+  }
+}
+```
+
+See the [Mapbox style specification](https://docs.mapbox.com/mapbox-gl-js/style-spec/) for additional properties that can be set in `paint`.
+
+#### ArcGIS style via your provider:
+You can modify the GeoJSON metadata of your provider to handle styling:
+
+```javascript
+// inside your getData function
+
+geojson.metadata = {}
+geojson.metadata.vt = {}
+geojson.metadata.vt = {
+  type: 'circle',
+  paint: {
+    'circle-radius': 4
+  }
+}
+
+```
+
+## Demos
+This repo ships with both MapBoxGL and ArcGIS demo applications that consume Koop vector tiles.  To try it out:
 
 ```
 cd demo
@@ -65,4 +128,4 @@ npm install
 npm start
 ```
 
-Then open `demo/index.html` in the browser of your choice.  You should see vector tile rendered points around the city of Pasadena, CA.
+Then open `mapbox-demo/index.html` or  `arcgis-js-api-demo.html` in the browser of your choice.  You should see vector tile rendered data around the city of Pasadena, CA.
