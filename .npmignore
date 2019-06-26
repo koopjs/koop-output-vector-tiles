@@ -1,5 +1,6 @@
 src
 test
+demo
 .babelrc
 .gitignore
 node_modules
