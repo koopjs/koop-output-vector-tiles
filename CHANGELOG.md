@@ -3,8 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
-### Changed
-* plugin class name (and thus routes) changed to `VectorTileServer` to accomodate ArcGIS requirements **(BREAKING-CHANGE)** 
+### Breaking Change
+* plugin class name (and thus routes) changed to `VectorTileServer` to accomodate ArcGIS requirements
 
 ### Added
 * ArcGIS metadata route
