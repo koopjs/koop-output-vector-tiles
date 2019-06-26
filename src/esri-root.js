@@ -5,11 +5,14 @@ const esriRenderingInfo = require('./esri-rendering-info')
 
 module.exports = function (req, res) {
   this.model.pull(req, (e, geojson) => {
+    if (e) return res.status(500).json(e)
+    if (!geojson) return res.status(404).send()
+
     // clone the root.json template
     const body = _.cloneDeep(template)
 
     // extract geojson metadata property
-    const { metadata } = geojson
+    const { metadata = {} } = geojson
 
     // compose the layer id from request parameters
     const id = Utils.getTileSetKey(req.params.host, req.params.id)

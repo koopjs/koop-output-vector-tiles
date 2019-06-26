@@ -7,22 +7,16 @@ const fixtureEsriMetadataResult = require('./fixtures/esri-metadata-result.json'
 fixtureGeojson.metadata = {
   title: 'Koop File GeoJSON',
   id: 'trees',
-  name: 'Test data',
-  extent: {
-    xmin: -118,
-    ymin: 34.0,
-    xmax: -117,
-    ymax: 34.2,
-    spatialReference: {
-      wkid: 4326
-    }
-  }
+  name: 'Test data'
 }
+
+let callbackErr = null
+let callbackData = fixtureGeojson
 
 function TestModel () {
   this.model = {
     pull: function (req, callback) {
-      callback(null, fixtureGeojson)
+      callback(callbackErr, callbackData)
     }
   }
 }
@@ -31,7 +25,7 @@ TestModel.prototype.esriMetadata = esriMetadata
 
 const testModel = new TestModel()
 
-test('esriMetadata', t => {
+test('esriMetadata - success', t => {
   const req = {
     params: { z: 0, x: 0, y: 0 },
     headers: {},
@@ -49,6 +43,45 @@ test('esriMetadata', t => {
       return res
     }
   }
+  testModel.esriMetadata(req, res)
+  t.end()
+})
+
+test('esriMetadata - error handling', t => {
+  const req = {
+    params: { id: 'test' }
+  }
+  const res = {
+    status: (code) => {
+      t.equals(code, 500, 'correct status code')
+      return res
+    },
+    json: (data) => {
+      t.equals(data.message, 'Internal server error', 'has error message')
+      return res
+    }
+  }
+  callbackErr = new Error('Internal server error')
+  testModel.esriMetadata(req, res)
+  t.end()
+})
+
+test('esriMetadata - 404 handling', t => {
+  const req = {
+    params: { id: 'test' }
+  }
+  const res = {
+    status: (code) => {
+      t.equals(code, 404, 'correct status code')
+      return res
+    },
+    send: () => {
+      t.pass('404 sent')
+      return res
+    }
+  }
+  callbackErr = null
+  callbackData = null
   testModel.esriMetadata(req, res)
   t.end()
 })
