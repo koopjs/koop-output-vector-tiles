@@ -2,8 +2,8 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
-## Changed
+## [2.1.0] - 2019-07-02
+### Changed
 * Added `rest/services` to routes targeting ArcGIS clients
 
 ### Added
@@ -34,6 +34,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 * Linting and travis build.
 
+[2.1.0]: https://github.com/koopjs/koop-output-vector-tiles/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/koopjs/koop-output-vector-tiles/compare/v1.0.1...v2.0.0
 [1.0.1]: https://github.com/koopjs/koop-output-vector-tiles/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/koopjs/koop-output-vector-tiles/compare/v0.0.3...v1.0.0
