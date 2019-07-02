@@ -29,11 +29,11 @@
         center: [-118.1445, 34.1478]
       });
 
-      var polylayer = new VectorTileLayer("http://localhost:8085/file-geojson/pasadena-parks/VectorTileServer/");
+      var polylayer = new VectorTileLayer("http://localhost:8085/file-geojson/rest/services/pasadena-parks/VectorTileServer/");
       map.addLayer(polylayer);
-      var linelayer = new VectorTileLayer("http://localhost:8085/file-geojson/pasadena-bus/VectorTileServer/");
+      var linelayer = new VectorTileLayer("http://localhost:8085/file-geojson/rest/services/pasadena-bus/VectorTileServer/");
       map.addLayer(linelayer);
-      var pointlayer = new VectorTileLayer("http://localhost:8085/file-geojson/trees/VectorTileServer/");
+      var pointlayer = new VectorTileLayer("http://localhost:8085/file-geojson/rest/services/trees/VectorTileServer/");
       map.addLayer(pointlayer);
     });
   </script>

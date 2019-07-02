@@ -23,9 +23,10 @@ After startup, Koop will include `VectorTileServer` routes for each registered p
 
 ```bash
 /github/:id/VectorTileServer/:z([0-9]+)/:x([0-9]+)/:y([0-9]+).pbf  GET
-/github/:id/VectorTileServer/tiles.json                            GET
-/github/:id/VectorTileServer                                       GET
-/github/:id/VectorTileServer/resources/styles/root.json            GET
+/github/rest/services/:id/VectorTileServer/tiles.json                            GET
+/github/rest/services/:id/VectorTileServer                                       GET, POST
+/github/rest/services/:id/VectorTileServer/                                       GET, POST
+/github/rest/services/:id/VectorTileServer/resources/styles/root.json            GET
 ```
 
 ## Routes
@@ -33,7 +34,8 @@ After startup, Koop will include `VectorTileServer` routes for each registered p
 | --- | --- | --- |
 |`/VectorTileServer/:z([0-9]+)/:x([0-9]+)/:y([0-9]+).pbf`| GET | Get a specific tile. |
 |`/VectorTileServer/tiles.json`| GET | Standard vector tile metadata. |
-|`/VectorTileServer`| GET | ArcGIS vector tile metadata. |
+|`/VectorTileServer`| GET, POST | ArcGIS vector tile metadata. |
+|`/VectorTileServer/`| GET, POST | ArcGIS vector tile metadata. |
 |`/VectorTileServer/resources/styles/root.json`| GET | ArcGIDS vector tile styling info. |
 
 
@@ -122,8 +124,14 @@ geojson.metadata.vt = {
 ## Demos
 This repo ships with both MapBoxGL and ArcGIS demo applications that consume Koop vector tiles.  To try it out:
 
-```
+```bash
+# Install plugin dependencies
+npm install
+
+# Move to demo directory
 cd demo
+
+# Install demo dependencies and start Express Koop server
 npm install
 npm start
 ```

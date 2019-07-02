@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+## Changed
+* Added `rest/services` to routes targeting ArcGIS clients
+
+### Added
+* trailing slash route - `VectorTileServer/` needed for ArcGIS clients
+
 ## [2.0.0] - 2019-06-26
 ### Breaking Change
 * plugin class name (and thus routes) changed to `VectorTileServer` to accomodate ArcGIS requirements

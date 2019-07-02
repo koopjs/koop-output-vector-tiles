@@ -18,12 +18,22 @@ VectorTileServer.routes = [
     handler: 'metadata'
   },
   {
-    path: 'VectorTileServer',
+    path: '$namespace/rest/services/$providerParams/VectorTileServer/:z([0-9]+)/:x([0-9]+)/:y([0-9]+).pbf',
     methods: ['get'],
+    handler: 'serve'
+  },
+  {
+    path: '$namespace/rest/services/$providerParams/VectorTileServer',
+    methods: ['get', 'post'],
     handler: 'esriMetadata'
   },
   {
-    path: 'VectorTileServer/resources/styles/root.json',
+    path: '$namespace/rest/services/$providerParams/VectorTileServer/',
+    methods: ['get', 'post'],
+    handler: 'esriMetadata'
+  },
+  {
+    path: '$namespace/rest/services/$providerParams/VectorTileServer/resources/styles/root.json',
     methods: ['get'],
     handler: 'esriRoot'
   }
