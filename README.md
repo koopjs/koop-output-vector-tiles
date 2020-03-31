@@ -36,7 +36,7 @@ After startup, Koop will include `VectorTileServer` routes for each registered p
 |`/VectorTileServer/tiles.json`| GET | Standard vector tile metadata. |
 |`/VectorTileServer`| GET, POST | ArcGIS vector tile metadata. |
 |`/VectorTileServer/`| GET, POST | ArcGIS vector tile metadata. |
-|`/VectorTileServer/resources/styles/root.json`| GET | ArcGIDS vector tile styling info. |
+|`/VectorTileServer/resources/styles/root.json`| GET | ArcGIS vector tile styling info. |
 
 
 ## Options and configuration
