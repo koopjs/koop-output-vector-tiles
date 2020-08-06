@@ -1,4 +1,4 @@
-# koop-provider-vector-tiles
+# @koopjs/output-vector-tiles
 
 This output-services plugin converts GeoJSON to `pbf` vector tiles.
 
@@ -10,7 +10,8 @@ npm install --save @koopjs/output-vector-tiles
 
 ## Usage
 
-Register this plugin with koop before your provider plugins to ensure that the `VectorTiles` routes are bound to the providers.
+Register this plugin with koop before your 
+plugins to ensure that the `VectorTiles` routes are bound to the providers.
 
 ```
 const tile = require('@koopjs/output-vector-tiles')
