@@ -30,7 +30,7 @@ module.exports = function (req, res) {
     Object.assign(body.layers[0], { id, 'source-layer': id, type, paint })
 
     // set the tile url
-    body.sources.esri.url = `${req.protocol}://${req.headers.host || req.host}${req.path.replace('resources/styles/root.json', '')}`
+    body.sources.esri.url = `${req.protocol}://${req.headers.host || req.host}${req.baseUrl || ''}${req.path.replace('resources/styles/root.json', '')}`
 
     res.status(200).json(body)
   })
