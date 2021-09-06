@@ -54,7 +54,7 @@ This output plugin has a built-in in-memory cache for storing generated tile set
 ```
 
 ### Tile generation settings
-This plugin leverages [geojsonvt]() to create tiles from GeoJSON.  If you want to adjust any of the geojsonvt settings, you can do so in the Config: 
+This plugin leverages [geojsonvt](https://github.com/mapbox/geojson-vt) to create tiles from GeoJSON.  If you want to adjust any of the geojsonvt settings, you can do so in the Config: 
 
 ```javascript
 {
