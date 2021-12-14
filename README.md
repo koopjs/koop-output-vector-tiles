@@ -22,17 +22,17 @@ koop.register(tiles)
 After startup, Koop will include `VectorTileServer` routes for each registered provider.  For example, if you had registered the Github provider, the following routes would be available:
 
 ```bash
-/github/:id/VectorTileServer/:z([0-9]+)/:x([0-9]+)/:y([0-9]+).pbf  GET
+/github/:id/VectorTileServer/:z([0-9]+)/:x([0-9]+)/:y([0-9]+).pbf                GET, POST
 /github/rest/services/:id/VectorTileServer/tiles.json                            GET
 /github/rest/services/:id/VectorTileServer                                       GET, POST
-/github/rest/services/:id/VectorTileServer/                                       GET, POST
+/github/rest/services/:id/VectorTileServer/                                      GET, POST
 /github/rest/services/:id/VectorTileServer/resources/styles/root.json            GET
 ```
 
 ## Routes
 | Route | Method | Description |
 | --- | --- | --- |
-|`/VectorTileServer/:z([0-9]+)/:x([0-9]+)/:y([0-9]+).pbf`| GET | Get a specific tile. |
+|`/VectorTileServer/:z([0-9]+)/:x([0-9]+)/:y([0-9]+).pbf`| GET, POST | Get a specific tile. |
 |`/VectorTileServer/tiles.json`| GET | Standard vector tile metadata. |
 |`/VectorTileServer`| GET, POST | ArcGIS vector tile metadata. |
 |`/VectorTileServer/`| GET, POST | ArcGIS vector tile metadata. |
