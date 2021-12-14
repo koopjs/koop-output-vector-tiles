@@ -9,7 +9,7 @@ VectorTileServer.type = 'output'
 VectorTileServer.routes = [
   {
     path: 'VectorTileServer/:z([0-9]+)/:x([0-9]+)/:y([0-9]+).pbf',
-    methods: ['get'],
+    methods: ['get', 'post'],
     handler: 'serve'
   },
   {
@@ -19,7 +19,7 @@ VectorTileServer.routes = [
   },
   {
     path: '$namespace/rest/services/$providerParams/VectorTileServer/:z([0-9]+)/:x([0-9]+)/:y([0-9]+).pbf',
-    methods: ['get'],
+    methods: ['get', 'post'],
     handler: 'serve'
   },
   {
