@@ -59,16 +59,18 @@ This plugin leverages [geojsonvt](https://github.com/mapbox/geojson-vt) to creat
 ```javascript
 {
   "koopOutputVectorTiles": {
-    "maxZoom": , // max zoom to preserve detail on; can't be higher than 24
-    "tolerance": , // simplification tolerance (higher means simpler)
-    "extent": , // tile extent (both width and height)
-    "buffer": , // 64 is the original default, using a higher number like 512, 1024 or 2048 gets rid of some geojson artifacts but increases the tilesSetCache size // tile buffer on each side
-    "debug": , // logging level (0 to disable, 1 or 2)
-    "lineMetrics": , // whether to enable line metrics tracking for LineString/MultiLineString features
-    "promoteId": , // name of a feature property to promote to feature.id. Cannot be used with `generateId`
-    "generateId": , // whether to generate feature ids. Cannot be used with `promoteId`
-    "indexMaxZoom": , // max zoom in the initial tile index
-    "indexMaxPoints":  // max number of points per tile in the index
+    "geojsonVT":{
+      "maxZoom": , // max zoom to preserve detail on; can't be higher than 24
+      "tolerance": , // simplification tolerance (higher means simpler)
+      "extent": , // tile extent (both width and height)
+      "buffer": , // 64 is the original default, using a higher number like 512, 1024 or 2048 gets rid of some geojson artifacts but increases the tilesSetCache size // tile buffer on each side
+      "debug": , // logging level (0 to disable, 1 or 2)
+      "lineMetrics": , // whether to enable line metrics tracking for LineString/MultiLineString features
+      "promoteId": , // name of a feature property to promote to feature.id. Cannot be used with `generateId`
+      "generateId": , // whether to generate feature ids. Cannot be used with `promoteId`
+      "indexMaxZoom": , // max zoom in the initial tile index
+      "indexMaxPoints":  // max number of points per tile in the index
+      }
   }
 }
 ```
