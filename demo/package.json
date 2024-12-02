@@ -12,6 +12,6 @@
     "standard": "^10.0.3"
   },
   "dependencies": {
-    "@koopjs/provider-file-geojson": "^1.0.0"
+    "@koopjs/provider-file-geojson": "^2.0.0"
   }
 }
